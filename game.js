@@ -132,5 +132,7 @@ function init(player, OPPONENT) {
         <img class = "winner-img" src="${imgSrc}</img>
         <div class="play" onclick="location.reload()">play Again!</div>
     `;
+
+    gameOverElement.classList.remove("hide");
   }
 }
