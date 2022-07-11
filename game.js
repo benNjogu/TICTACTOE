@@ -121,4 +121,16 @@ function init(player, OPPONENT) {
 
     return false;
   }
+
+  //show game over
+  function showGameOver(player) {
+    let message = player == "tie" ? "Oops No Winner" : "The Winner is";
+    let imgSrc = `img/${player}.png`;
+
+    gameOverElement.innerHTML = `
+        <h1>${message}</h1>
+        <img class = "winner-img" src="${imgSrc}</img>
+        <div class="play" onclick="location.reload()">play Again!</div>
+    `;
+  }
 }
