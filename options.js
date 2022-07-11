@@ -42,7 +42,10 @@ oBtn.addEventListener("click", function () {
   switchActive(xBtn, oBtn);
 });
 
-play.addEventListener("click", function () {});
+play.addEventListener("click", function () {
+  init(player, OPPONENT);
+  options.classList.add("hide");
+});
 
 //switch active class between two elements
 function switchActive(off, on) {
