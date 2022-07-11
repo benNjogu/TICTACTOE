@@ -43,6 +43,22 @@ oBtn.addEventListener("click", function () {
 });
 
 play.addEventListener("click", function () {
+  //check if user chose an opponent or not
+  if (!OPPONENT) {
+    computerBtn.style.backgroundColor = "#f00";
+    friendBtn.style.backgroundColor = "#f00";
+
+    return;
+  }
+
+  //check if user chose a symbol
+  if (!player.man) {
+    xBtn.style.backgroundColor = "#f00";
+    oBtn.style.backgroundColor = "#f00";
+
+    return;
+  }
+
   init(player, OPPONENT);
   options.classList.add("hide");
 });
