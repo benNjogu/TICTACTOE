@@ -80,7 +80,7 @@ function init(player, OPPONENT) {
     gameData[id] = currentPlayer;
 
     //draw the move on the board
-    drawOnBoard(currentPlayer);
+    drawOnBoard(currentPlayer, i, j);
 
     //check if player wins
     if (isWinner(gameData, currentPlayer)) {
@@ -143,5 +143,13 @@ function init(player, OPPONENT) {
     `;
 
     gameOverElement.classList.remove("hide");
+  }
+
+  //draw on board
+  function drawOnBoard(player, i, j) {
+    let img = player == "X" ? xImage : oImage;
+
+    //the x,y position of the image are the x,y positions of the clicked space
+    ctx.drawImage(img, j * SPACE_SIZE, i * SPACE_SIZE);
   }
 }
