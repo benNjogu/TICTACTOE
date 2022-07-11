@@ -27,6 +27,9 @@ function init(player, OPPONENT) {
     [2, 4, 6],
   ];
 
+  //for game over check
+  let GAME_OVER = false;
+
   //draw the board
   function drawBoard() {
     //we give every space a UID
@@ -49,6 +52,9 @@ function init(player, OPPONENT) {
 
   //on player's click
   canvas.addEventListener("click", function (event) {
+    //if its a game over, exit
+    if (GAME_OVER) return;
+
     //x and y position of mouse click relative to our canvas
     let X = event.clientX - canvas.getBoundingClientRect().x;
     let Y = event.clientY - canvas.getBoundingClientRect().y;
