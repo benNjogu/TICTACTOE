@@ -9,11 +9,24 @@ function init(player, OPPONENT) {
   const ROW = 3;
   const SPACE_SIZE = 150;
 
+  //store player's move
+  let gameData = new Array(9);
+
+  //by default man is the first player to play
+  let currentPlayer = player.man;
+
   //draw the board
   function drawBoard() {
+    //we give every space a UID
+    //so we know where to place each move on the gamedata array
+    let id = 0;
     for (let i = 0; i < ROW; i++) {
       board[i] = [];
       for (let j = 0; j < COLUMN; j++) {
+        board[i][j] = id;
+        id++;
+
+        //draw the spaces
         ctx.strokeStyle = "#000";
         ctx.strokeRect(j * SPACE_SIZE, i * SPACE_SIZE, SPACE_SIZE, SPACE_SIZE);
       }
@@ -31,5 +44,15 @@ function init(player, OPPONENT) {
     //we calculate i and j of the clicked space
     let i = Math.floor(Y / SPACE_SIZE);
     let j = Math.floor(X / SPACE_SIZE);
+
+    //get the id of the space the player clicked on
+    let id = [i][j];
+
+    //store the player's move to gamedata
+    gameData[id] = currentPlayer;
+    console.log(gameData); 
+
+    //give turn to the other player
+    currentPlayer = currentPlayer == player.man ? player.friend : player.man;
   });
 }
