@@ -14,26 +14,32 @@ let OPPONENT;
 const player = new Object;
 
 //add an eventlistener to each button
-computerBtn.addEventListener("click", function(){
-    OPPONENT = "computer";
+computerBtn.addEventListener("click", function () {
+  OPPONENT = "computer";
+  switchActive(friendBtn, computerBtn);
 });
 
-friendBtn.addEventListener("click", function(){
-    OPPONENT = "friend";
+friendBtn.addEventListener("click", function () {
+  OPPONENT = "friend";
+  switchActive(computerBtn, friendBtn);
 });
 
-xBtn.addEventListener("click", function(){
-    player.man = "X";
-    player.computer = "O";
-    player.friend = "O";
+xBtn.addEventListener("click", function () {
+  player.man = "X";
+  player.computer = "O";
+  player.friend = "O";
 });
 
-oBtn.addEventListener("click", function(){
-    player.man = "O";
-    player.computer = "X";
-    player.friend = "X";
+oBtn.addEventListener("click", function () {
+  player.man = "O";
+  player.computer = "X";
+  player.friend = "X";
 });
 
-play.addEventListener("click", function(){
+play.addEventListener("click", function () {});
 
-});
+//switch active class between two elements
+function switchActive(off, on) {
+  off.classList.remove("active");
+  on.classList.add("active");
+}
