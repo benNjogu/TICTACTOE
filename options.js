@@ -59,6 +59,7 @@ play.addEventListener("click", function () {
     return;
   }
 
+  //run the game
   init(player, OPPONENT);
   options.classList.add("hide");
 });
