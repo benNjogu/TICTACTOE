@@ -15,6 +15,13 @@ function init(player, OPPONENT) {
   //by default man is the first player to play
   let currentPlayer = player.man;
 
+  //load X and O images
+  const xImage = new Image();
+  xImage.src = "img/X.png";
+
+  const oImage = new Image();
+  oImage.src = "img/O.png";
+
   //win combinations
   const COMBOS = [
     [0, 1, 2],
@@ -71,7 +78,9 @@ function init(player, OPPONENT) {
 
     //store the player's move to gamedata
     gameData[id] = currentPlayer;
-    console.log(gameData);
+
+    //draw the move on the board
+    drawOnBoard(currentPlayer);
 
     //check if player wins
     if (isWinner(gameData, currentPlayer)) {
