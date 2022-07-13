@@ -71,13 +71,14 @@ function init(player, OPPONENT) {
     let j = Math.floor(X / SPACE_SIZE);
 
     //get the id of the space the player clicked on
-    let id = [i][j];
+    let id = board[i][j];
 
     //prevent the player to play the same space twice
-    if (gameData[id]) return;
+    // if (gameData[id]) return;
 
     //store the player's move to gamedata
     gameData[id] = currentPlayer;
+    console.log(gameData);
 
     //draw the move on the board
     drawOnBoard(currentPlayer, i, j);
@@ -138,7 +139,7 @@ function init(player, OPPONENT) {
 
     gameOverElement.innerHTML = `
         <h1>${message}</h1>
-        <img class = "winner-img" src="${imgSrc}</img>
+        <img class = "winner-img" src="${imgSrc}"</img>
         <div class="play" onclick="location.reload()">play Again!</div>
     `;
 
