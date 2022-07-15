@@ -74,7 +74,7 @@ function init(player, OPPONENT) {
     let id = board[i][j];
 
     //prevent the player to play the same space twice
-    // if (gameData[id]) return;
+    if (gameData[id]) return;
 
     //store the player's move to gamedata
     gameData[id] = currentPlayer;
