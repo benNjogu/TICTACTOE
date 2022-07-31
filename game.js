@@ -165,6 +165,30 @@ function init(player, OPPONENT) {
       //save move to move array
       moves.push(move);
     }
+
+    //minimax algorithm
+    let bestmove;
+    if (PLAYER == player.computer) {
+      //maximizer
+      let bestEvaluation = -Infinity;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].evaluation > bestEvaluation) {
+          bestEvaluation = moves[i].evaluation;
+          bestmove = moves[i];
+        }
+      }
+    } else {
+      //minimizer
+      let bestEvaluation = +Infinity;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].evaluation < bestEvaluation) {
+          bestEvaluation = moves[i].evaluation;
+          bestmove = moves[i];
+        }
+      }
+    }
+
+    return bestmove;
   }
 
   //get empty spaces function
