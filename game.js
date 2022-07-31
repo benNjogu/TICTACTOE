@@ -100,11 +100,11 @@ function init(player, OPPONENT) {
 
     if (OPPONENT == "computer") {
       //get the id of the space using the minimax algorithm
-      let id = minimax(gameData, player.computer.id).id;
+      let id = minimax(gameData, player.computer).id;
 
       //store the player's move to gamedata
       gameData[id] = player.computer;
-      // console.log(gameData);
+      console.log(gameData);
 
       //get i and j of the space
       let space = getIJ(id);
@@ -144,7 +144,7 @@ function init(player, OPPONENT) {
       let id = EMPTY_SPACES[i];
 
       //back up the space
-      let backup = gameData[i];
+      let backup = gameData[id];
 
       //make the move for the player
       gameData[id] = PLAYER;
@@ -167,14 +167,14 @@ function init(player, OPPONENT) {
     }
 
     //minimax algorithm
-    let bestmove;
+    let bestMove;
     if (PLAYER == player.computer) {
       //maximizer
       let bestEvaluation = -Infinity;
       for (let i = 0; i < moves.length; i++) {
         if (moves[i].evaluation > bestEvaluation) {
           bestEvaluation = moves[i].evaluation;
-          bestmove = moves[i];
+          bestMove = moves[i];
         }
       }
     } else {
@@ -183,12 +183,12 @@ function init(player, OPPONENT) {
       for (let i = 0; i < moves.length; i++) {
         if (moves[i].evaluation < bestEvaluation) {
           bestEvaluation = moves[i].evaluation;
-          bestmove = moves[i];
+          bestMove = moves[i];
         }
       }
     }
 
-    return bestmove;
+    return bestMove;
   }
 
   //get empty spaces function
