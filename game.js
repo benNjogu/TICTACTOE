@@ -98,9 +98,93 @@ function init(player, OPPONENT) {
       return;
     }
 
-    //give turn to the other player
-    currentPlayer = currentPlayer == player.man ? player.friend : player.man;
+    if (OPPONENT == "computer") {
+      //get the id of the space using the minimax algorithm
+      let id = minimax(gameData, player.computer.id).id;
+
+      //store the player's move to gamedata
+      gameData[id] = player.computer;
+      // console.log(gameData);
+
+      //get i and j of the space
+      let space = getIJ(id);
+
+      //draw the move on the board
+      drawOnBoard(player.computer, space.i, space.j);
+
+      //check if player wins
+      if (isWinner(gameData, player.computer)) {
+        showGameOver(player.computer);
+
+        GAME_OVER = true;
+        return;
+      }
+    } else {
+      //give turn to the other player
+      currentPlayer = currentPlayer == player.man ? player.friend : player.man;
+    }
   });
+
+  //minimax
+  function minimax(gameData, PLAYER) {
+    //base
+    if (isWinner(gameData, player.computer)) return { evaluation: +10 };
+    if (isWinner(gameData, player.man)) return { evaluation: -10 };
+    if (isTie(gameData)) return { evaluation: 0 };
+
+    //look for empty spaces
+    let EMPTY_SPACES = getEmptySpaces(gameData);
+
+    //save all moves and their evaluation
+    let moves = [];
+
+    //loop over the empty spaces to evaluate them
+    for (let i = 0; i < EMPTY_SPACES.length; i++) {
+      //get the id of the empty space
+      let id = EMPTY_SPACES[i];
+
+      //back up the space
+      let backup = gameData[i];
+
+      //make the move for the player
+      gameData[id] = PLAYER;
+
+      //save the move's id and evaluation
+      let move = {};
+      move.id = id;
+      //the move evaluation
+      if (PLAYER == player.computer) {
+        move.evaluation = minimax(gameData, player.man).evaluation;
+      } else {
+        move.evaluation = minimax(gameData, player.computer).evaluation;
+      }
+
+      //restore space
+      gameData[id] = backup;
+
+      //save move to move array
+      moves.push(move);
+    }
+  }
+
+  //get empty spaces function
+  function getEmptySpaces(gameData) {
+    let EMPTY = [];
+    for (let id = 0; id < gameData.length; id++) {
+      if (!gameData[id]) EMPTY.push(id);
+    }
+
+    return EMPTY;
+  }
+
+  //get i and j of a space
+  function getIJ(id) {
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        if (board[i][j] == id) return { i: i, j: j };
+      }
+    }
+  }
 
   //check for a winner
   function isWinner(gameData, player) {
